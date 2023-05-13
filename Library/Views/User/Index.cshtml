@@ -1,0 +1,35 @@
+﻿@using Library.Domain.ViewModel.User
+@model List<UserViewModel>
+
+
+<section class="flush-with-above">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <table class="table table-hover align-items-center table-borderless">
+                    <tbody>
+                        @foreach (var user in Model)
+                        {
+                            <tr class="bg-white">
+                                <th scope="row">
+                                    <div class="media align-items-center">
+                                        <div class="media-body">
+                                            <span class="h6 mb-0">@user.UserName</span>
+                                        </div>
+                                        <div class="media-body">
+                                            <span class="h6 mb-0">@user.Id</span>
+                                        </div>
+                                    </div>
+                                </th>
+                                <td>
+                                    <a class="btn btn-outline-primary" asp-controller="User" asp-action="Detail" asp-route-id="@user.Id">
+                                        View Profile
+                                    </a>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

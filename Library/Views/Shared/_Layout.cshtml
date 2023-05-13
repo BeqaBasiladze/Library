@@ -12,7 +12,11 @@
 <body>
     <header>
         <div class="topnav">
-            <a class="active" asp-controller="Home" asp-action="Index">Home</a>
+            <a class="nav-link active" asp-controller="Home" asp-action="Index">Home</a>
+            @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+            {
+                <a class="nav-link" asp-controller="User" asp-action="Index">User</a>
+            }
             <a class="nav-link" asp-controller="Account" asp-action="Register">Registration</a>
             <a class="nav-link" asp-controller="Account" asp-action="Login">Log in</a>
         </div>

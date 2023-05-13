@@ -17,9 +17,10 @@ namespace Library.Controllers
 
         public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, ApplicationDbContext context)
         {
-            _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
+            _context = context;
+
         }
 
         public IActionResult Login()
@@ -83,16 +84,18 @@ namespace Library.Controllers
             var newUser = new User()
             {
                 Email = registerViewModel.EmailAddress,
-                UserName = registerViewModel.EmailAddress
+                UserName = registerViewModel.EmailAddress,
+                FirstName = registerViewModel.Name,
+                LastName = registerViewModel.LastName
             };
             var newUserResponse = await _userManager.CreateAsync(newUser, registerViewModel.Password);
 
             if(newUserResponse.Succeeded)
             {
-                await _userManager.AddToRoleAsync(newUser, "user");
+                await _userManager.AddToRoleAsync(newUser, UserLevel.User);
             }
 
-            return RedirectToAction("Index", "Home");
+            return View(registerViewModel);
         }
 
         [HttpPost]

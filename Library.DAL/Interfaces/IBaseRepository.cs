@@ -9,8 +9,8 @@ namespace Library.DAL.Interfaces
     public interface IBaseRepository<T> where T : class
     {
         bool Create(T entity);
-        IQueryable<T> GetAll();
         bool Delete(T entity);
-        T Update(T entity);
+        bool Update(T entity);
+        bool Save();
     }
 }

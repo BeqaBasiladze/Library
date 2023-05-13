@@ -1,92 +1,48 @@
 ﻿using Library.DAL.Interfaces;
-using Library.Domain.Entity;
 using Library.Domain.ViewModel.User;
-using Library.Service.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Data;
 
 namespace Library.Controllers
 {
     public class UserController : Controller
     {
-        private readonly IUserService _userService;
-
-        public UserController(IUserService userService)
+        private readonly IUserRepository _userRepository;
+        public UserController(IUserRepository userRepository)
         {
-            _userService = userService;
+            _userRepository = userRepository;
+        }
+        [HttpGet("Users")]
+        public async Task<IActionResult> Index()
+        {
+            var users = await _userRepository.GetAllUsers();
+            List<UserViewModel> result = new List<UserViewModel>();
+            foreach (var user in users)
+            {
+                var userViewModel = new UserViewModel
+                {
+                    Id = user.Id,
+                    UserName = user.UserName,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName
+                };
+                result.Add(userViewModel);
+            }
+            return View(result);
         }
 
-        [HttpGet]
-        public IActionResult GetUsers() // get all users
+        public async Task<IActionResult> Detail(string id)
         {
-            var response = _userService.GetAllUsers();
-            if(response.StatusCode == Domain.Enum.StatusCode.OK)
+            var user = await _userRepository.GetUserById(id);
+            var userDetailViewModel = new UserDetailViewModel()
             {
-                return View(response.Data);
-            }
-            return RedirectToAction("Error");
-        }
-
-        [HttpGet]
-        public IActionResult GetUser(int id) // get user by id
-        {
-            var response = _userService.GetUserById(id);
-            if(response.StatusCode == Domain.Enum.StatusCode.OK)
-            {
-                return View(response.Data);
-            }
-            return RedirectToAction("Error");
-        }
-
-        [Authorize(Roles = "Admin")]
-        public IActionResult Delete(int id)
-        {
-            var response = _userService.DeleteUser(id);
-            if (response.StatusCode == Domain.Enum.StatusCode.OK)
-            {
-                return RedirectToAction("GetUsers");
-            }
-            return RedirectToAction("Error");
-        }
-
-        [HttpGet]
-        //[Authorize(Roles = "Admin")]
-        public IActionResult Save(int id)
-        {
-            if(id == 0)
-            {
-                return View();
-            }
-
-            var response = _userService.GetUserById(id);
-            if(response.StatusCode == Domain.Enum.StatusCode.OK)
-            {
-                return View(response.Data);
-            }
-            return RedirectToAction("Error");
-        }
-
-        //[HttpPost]
-        //public IActionResult Save(UserViewModel model)
-        //{
-        //    if(ModelState.IsValid)
-        //    {
-        //        if(model.ID == 0)
-        //        {
-        //            _userService.CreateUser(model);
-        //        }
-        //        else
-        //        {
-        //            _userService.EditeUser(model.ID, model);
-        //        }
-        //    }
-        //    return RedirectToAction("GetUsers");
-        //}
-
-        public IActionResult CreateUser()
-        {
-            return View();
+                Id = user.Id,
+                UserName = user.UserName,
+                Email = user.Email,
+                Password = user.PasswordHash,
+                FirstName = user.FirstName,
+                LastName = user.LastName
+            };
+            return View(userDetailViewModel);
         }
     }
 }

@@ -12,6 +12,8 @@ namespace Library.Domain.Entity
 {
     public class User : IdentityUser
     {
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
         [ForeignKey("Readers")]
         public int ReaderID { get; set; }
         public DateTime CreatedAt { get; set; }

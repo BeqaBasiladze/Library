@@ -1,6 +1,7 @@
 ﻿using Library.DAL.Interfaces;
 using Library.Domain.Entity;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Library.DAL.Repositories
 {
@@ -15,40 +16,34 @@ namespace Library.DAL.Repositories
 
         public bool Create(User entity)
         {
-            _db.Users.Add(entity);
-            _db.SaveChanges();
-
-            return true;
+            throw new NotImplementedException();
         }
 
         public bool Delete(User entity)
         {
-            _db.Users.Remove(entity);
-            _db.SaveChanges();
-
-            return true;
+            throw new NotImplementedException();
         }
 
-        //public User Get(int id)
-        //{
-        //    return _db.Users.FirstOrDefault(x => x.ID == id);
-        //}
-
-        //public User GetByName(string name)
-        //{
-        //    return _db.Users.FirstOrDefault(x => x.UserName == name);
-        //}
-
-        public IQueryable<User> GetAll()
+        public async Task<IEnumerable<User>> GetAllUsers()
         {
-            return _db.Users;
+            return await _db.Users.ToListAsync();
         }
 
-        public User Update(User entity)
+        public async Task<User> GetUserById(string id)
         {
-            _db.Users.Update(entity);
-            _db.SaveChanges();
-            return entity;
+            return await _db.Users.FindAsync(id);
+        }
+
+        public bool Save()
+        {
+            var saved = _db.SaveChanges();
+            return saved > 0 ? true : false;
+        }
+
+        public bool Update(User user)
+        {
+            _db.Update(user);
+            return Save();
         }
     }
 }
