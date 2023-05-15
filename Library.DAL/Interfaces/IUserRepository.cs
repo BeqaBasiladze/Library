@@ -9,7 +9,7 @@ namespace Library.DAL.Interfaces
 {
     public interface IUserRepository : IBaseRepository<User>
     {
-        Task<User> GetUserById(string id);
+        Task<User> GetUserById(string id); 
         Task<IEnumerable<User>> GetAllUsers();
     }
 }

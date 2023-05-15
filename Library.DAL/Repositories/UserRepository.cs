@@ -42,7 +42,7 @@ namespace Library.DAL.Repositories
 
         public bool Update(User user)
         {
-            _db.Update(user);
+            _db.Users.Update(user);
             return Save();
         }
     }

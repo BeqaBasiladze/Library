@@ -21,7 +21,6 @@ builder.Services.AddDbContext<ApplicationDbContext>(optionsAction =>
 
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-//builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddIdentity<User, IdentityRole>().
     AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddMemoryCache();
@@ -34,6 +33,10 @@ var app = builder.Build();
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
+if(args.Length == 1 && args[0].ToLower() == "seeddata")
+{
+    await SeedRoles.SeedUsersAndRolesAsync(app);
+}
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

@@ -15,12 +15,11 @@ namespace Library.Controllers
         private readonly SignInManager<User> _signInManager;
         private readonly ApplicationDbContext _context;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, ApplicationDbContext context)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, ApplicationDbContext context )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _context = context;
-
         }
 
         public IActionResult Login()
@@ -93,6 +92,7 @@ namespace Library.Controllers
             if(newUserResponse.Succeeded)
             {
                 await _userManager.AddToRoleAsync(newUser, UserLevel.User);
+                return RedirectToAction("Login", "Account");
             }
 
             return View(registerViewModel);

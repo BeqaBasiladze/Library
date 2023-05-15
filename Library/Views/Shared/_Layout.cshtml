@@ -13,12 +13,20 @@
     <header>
         <div class="topnav">
             <a class="nav-link active" asp-controller="Home" asp-action="Index">Home</a>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a class="nav-link" asp-controller="EditUserProfile" asp-action="EditUserProfile">Edit user</a>
+                <button class="btn btn-outline-danger" asp-controller="Account" asp-action="Logout">Logout</button>
+            }
+            else
+            {
+                <a class="nav-link" asp-controller="Account" asp-action="Register">Registration</a>
+                <a class="nav-link" asp-controller="Account" asp-action="Login">Log in</a>
+            }
             @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
             {
                 <a class="nav-link" asp-controller="User" asp-action="Index">User</a>
             }
-            <a class="nav-link" asp-controller="Account" asp-action="Register">Registration</a>
-            <a class="nav-link" asp-controller="Account" asp-action="Login">Log in</a>
         </div>
     </header>
     <div class="container">
