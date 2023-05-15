@@ -11,7 +11,7 @@ namespace Library.Domain.ViewModel.Register
     {
         [Required(ErrorMessage = "Enter your name")]
         [StringLength(50,MinimumLength = 3, ErrorMessage = "The string length must be between 3 and 50 characters")]
-        public string Name { get; set; }
+        public string FirstName { get; set; }
         [StringLength(50, MinimumLength = 3, ErrorMessage = "The string length must be between 3 and 50 characters")]
         [Required(ErrorMessage = "Enter your last name")]
         public string LastName { get; set; }
