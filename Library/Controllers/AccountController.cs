@@ -6,6 +6,7 @@ using Library.Domain.ViewModel.Login;
 using Library.Domain.ViewModel.Register;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.HttpSys;
 
 namespace Library.Controllers
 {
@@ -84,7 +85,7 @@ namespace Library.Controllers
             {
                 Email = registerViewModel.EmailAddress,
                 UserName = registerViewModel.EmailAddress,
-                FirstName = registerViewModel.Name,
+                FirstName = registerViewModel.FirstName,
                 LastName = registerViewModel.LastName
             };
             var newUserResponse = await _userManager.CreateAsync(newUser, registerViewModel.Password);
@@ -99,10 +100,11 @@ namespace Library.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Logout()
+        [ValidateAntiForgeryToken]
+        public IActionResult Logout()
         {
-            await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            _signInManager.SignOutAsync();
+            return RedirectToAction("Login", "Account");
         }
     }
 }

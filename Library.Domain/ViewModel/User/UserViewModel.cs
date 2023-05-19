@@ -16,5 +16,6 @@ namespace Library.Domain.ViewModel.User
         public string? FirstName { get; set; }
         public string? LastName { get; set;}
 
+
     }
 }
