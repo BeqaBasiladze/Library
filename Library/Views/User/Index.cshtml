@@ -15,10 +15,10 @@
                             <tr class="bg-white">
                                 <th scope="row">
                                     <div class="media align-items-center">
-                                        <div class="media-body">
+                                        <div class="media-body mb-2">
                                             <span class="h6 mb-0">@user.UserName</span>
                                         </div>
-                                        <div class="media-body">
+                                        <div class="media-body mb-2">
                                             <span class="h6 mb-0">@user.Id</span>
                                         </div>
                                     </div>
@@ -27,7 +27,7 @@
                                     <a class="btn btn-outline-primary" asp-controller="User" asp-action="Detail" asp-route-id="@user.Id">
                                         View Profile
                                     </a>
-                                    <a class="btn btn-danger btn-outline-primary" asp-controller="User" asp-action="UserDelete" asp-route-id="@user.Id">
+                                    <a class="btn btn-danger btn-outline-primary offset-4" asp-controller="User" asp-action="UserDelete" asp-route-id="@user.Id">
                                         Delete
                                     </a>
                             </tr>

@@ -62,7 +62,7 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <button type="button" class="btn btn-outline-danger" asp-controller="Account" asp-action="Logout">Logout</button>
+                                <a type="button" class="btn btn-outline-danger" asp-controller="Account" asp-action="Logout">Logout</a>
                             </li>
                         }
                     </ul>
@@ -79,9 +79,5 @@
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
-
-    </footer>
 </body>
 </html>
