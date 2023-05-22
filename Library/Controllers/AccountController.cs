@@ -99,7 +99,7 @@ namespace Library.Controllers
             return View(registerViewModel);
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult Logout()
         {
             _signInManager.SignOutAsync();
