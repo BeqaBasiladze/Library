@@ -103,7 +103,7 @@ namespace Library.Controllers
         public IActionResult Logout()
         {
             _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
     }
 }

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Library</title>
     <link rel="stylesheet" href="~/css/BootswatchTheme.css" />
-    @*<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />*@
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Library.styles.css" asp-append-version="true" />
 </head>
 <body>
@@ -59,10 +59,10 @@
                                 <a class="nav-link" asp-controller="User" asp-action="Index">User</a>
                             </li>
                         }
-                        @if (User.Identity.IsAuthenticated)
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
                         {
                             <li class="nav-item">
-                                <a type="button" class="btn btn-outline-danger" asp-controller="Account" asp-action="Logout">Logout</a>
+                                <a type="button" class="btn btn-outline-danger" asp-controller="Account" asp-action="Logout" asp-area="AccountController">Logout</a>
                             </li>
                         }
                     </ul>
@@ -79,5 +79,21 @@
             @RenderBody()
         </main>
     </div>
+    <footer>
+
+    </footer>
+
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        //pagination_example
+
+        $(document).ready(function(){
+            $('#pagination_example').DataTable();
+        });
+    </script>
+
+
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
