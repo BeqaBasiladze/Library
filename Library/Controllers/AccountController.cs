@@ -99,11 +99,11 @@ namespace Library.Controllers
             return View(registerViewModel);
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult Logout()
         {
             _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
     }
 }

@@ -16,6 +16,8 @@ namespace Library.Domain.ViewModel.User
         public string? FirstName { get; set; }
         public string? LastName { get; set;}
 
-
+        public int PageSize { get; set; }
+        public int CurrentPage { get; set; }
+        public int TotalPages { get; set; }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using Library.DAL.Interfaces;
+using Library.Domain.Entity;
 using Library.Domain.Helpers;
 using Library.Domain.ViewModel.User;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Library.Controllers
 {
@@ -24,41 +26,28 @@ namespace Library.Controllers
         }
 
         [HttpGet("Users")]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int currentPage = 1)
         {
             var users = await _userRepository.Get();
             List<UserViewModel> result = new List<UserViewModel>();
-            foreach (var user in users)
-            {
-                var userViewModel = new UserViewModel
-                {
-                    Id = user.Id,
-                    UserName = user.UserName,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName
-                };
-                result.Add(userViewModel);
-            }
-            return View(result);
-        }
+            var userViewModel = new UserViewModel();
 
-        public async Task<IActionResult> GetPaggedData(int pageNumber = 1, int pageSize = 20)
-        {
-            var users = await _userRepository.Get();
-            List<UserViewModel> result = new List<UserViewModel>();
+
+            int totalRecords = users.Count();
+            int pageSize = 5;
+            int totalPages = (int)Math.Ceiling(totalRecords / (double)pageSize);
+            users = users.Skip((currentPage - 1) * pageSize).Take(pageSize);
+
             foreach (var user in users)
             {
-                var userViewModel = new UserViewModel
-                {
-                    Id = user.Id,
-                    UserName = user.UserName,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName
-                };
+                userViewModel.Id = user.Id;
+                userViewModel.UserName = user.UserName;
                 result.Add(userViewModel);
             }
-            var pagedData = Pagination.PagedResult(result, pageNumber, pageSize);
-            return Json(pagedData);
+            userViewModel.CurrentPage = currentPage;
+            userViewModel.TotalPages = totalPages;
+            userViewModel.PageSize = pageSize;
+            return View(result);
         }
 
         public async Task<IActionResult> Detail(string id)
