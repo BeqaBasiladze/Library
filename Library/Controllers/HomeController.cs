@@ -1,7 +1,6 @@
 ﻿using Library.DAL;
 using Library.DAL.Interfaces;
 using Library.Domain.Entity;
-using Library.Domain.ViewModel.Menu;
 using Library.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -19,34 +18,7 @@ namespace Library.Controllers
         }
         public IActionResult Index()
         {
-            var menuItems = GetMenuItemsFromDatabase();
-            return View(menuItems);
-        }
-        private List<MenuItemViewModel> GetMenuItemsFromDatabase()
-        {
-            return new List<MenuItemViewModel>
-            {
-                new MenuItemViewModel
-                {
-                    Title = "Home",
-                    URL = "Home",
-                    Description = "Home Page",
-                    IsActive = true,
-                    CreatedAt = DateTime.Now,
-                    ModifiedAt = DateTime.Now,
-                    IsDeleted = false
-                },
-                new MenuItemViewModel
-                {
-                    Title = "Registration",
-                    URL = "Account/Register",
-                    Description = "Registration Page",
-                    IsActive = true,
-                    CreatedAt = DateTime.Now,
-                    ModifiedAt = DateTime.Now,
-                    IsDeleted = false
-                }
-            };
+            return View();
         }
 
         public IActionResult Privacy()
