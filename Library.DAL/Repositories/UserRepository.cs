@@ -53,7 +53,6 @@ namespace Library.DAL.Repositories
 
         public async Task<User> GetUserById(string id)
         {
-            //var user = await _db.Users.FindAsync(id);
             var user = await _db.Users.Where(c=>c.Id ==  id).FirstOrDefaultAsync();
             return user;
         }

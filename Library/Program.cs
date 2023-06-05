@@ -19,14 +19,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(optionsAction =>
     optionsAction.UseSqlServer(connection));
 
 
-
-builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddIdentity<User, IdentityRole>().
     AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddMemoryCache();
 builder.Services.AddSession();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 
