@@ -26,6 +26,7 @@ builder.Services.AddSession();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IMenuItemRepository, MenuItemRepository>();
 
 var app = builder.Build();
 

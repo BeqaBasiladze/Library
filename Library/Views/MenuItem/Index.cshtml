@@ -1,0 +1,43 @@
+﻿@using Library.Domain.Entity
+@model IEnumerable<MenuItem>
+
+
+<h2>Menu Items</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>isActive</th>
+            <th>CreatedAt</th>
+            <th>ModifiedAt</th>
+            <th>DeletedAt</th>
+            <th>isDelete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.Description</td>
+                <td>@item.isActive</td>
+                <td>@item.CreatedAt</td>
+                <td>@item.ModifiedAt</td>
+                <td>@item.DeletedAt</td>
+                <td>@item.isDelete</td>
+                <td>
+                    <a asp-controller="MenuItem" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                </td>
+                <td>
+                    <a asp-controller="MenuItem" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>
+    <a asp-controller="MenuItem" asp-action="Create">Create New</a>
+</p>

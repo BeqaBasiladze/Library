@@ -18,6 +18,6 @@ namespace Library.DAL
         }
 
         public DbSet<User> Users { get; set; }
-
+        public DbSet<MenuItem> MenuItems { get; set; }
     }
 }

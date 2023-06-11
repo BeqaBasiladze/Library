@@ -1,7 +1,16 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@using Library.Domain.Entity
+@model IEnumerable<MenuItem>
 
-<div class="text-center">
 
-</div>
+<
+<ul class="list-group">
+    @foreach (var item in Model)
+    {
+        <li class="list-group-item">
+            <span class="font-weight-bold">@item.Title</span>
+        </li>
+    }
+</ul>
