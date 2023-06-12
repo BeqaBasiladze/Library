@@ -1,7 +1,4 @@
-﻿@*@using Library.Domain.ViewModel.Menu
-@model List<MenuItemViewModel>*@
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -14,35 +11,8 @@
 </head>
 <body>
     <header>
-        @*<div class="topnav">
-            <a class="nav-link active" asp-controller="Home" asp-action="Index">Home</a>
-            @if (User.Identity.IsAuthenticated)
-            {
-                <a class="nav-link" asp-controller="EditUserProfile" asp-action="EditUserProfile">Edit user</a>
-                <button class="btn btn-outline-danger" asp-controller="Account" asp-action="Logout">Logout</button>
-            }
-            else
-            {
-                <a class="nav-link" asp-controller="Account" asp-action="Register">Registration</a>
-                <a class="nav-link" asp-controller="Account" asp-action="Login">Log in</a>
-            }
-            @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
-            {
-                <a class="nav-link" asp-controller="User" asp-action="Index">User</a>
-            }
-        </div>*@
 
-       @* <ul>
-            @foreach(var menuItem in Model)
-            {
-                <li>
-                    <a href="@menuItem.URL">@menuItem.Title</a>
-                </li>
-            }
-        </ul>
-*@
-
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        @*<nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-controller="Home" asp-action="Index">MyLibrary</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
@@ -83,12 +53,21 @@
                     </ul>
                 </div>
             </div>
+        </nav>*@
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/">Library</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                @Html.Partial("_MenuPartial")
+            </div>
         </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
+        <main>
             @RenderBody()
-
         </main>
     </div>
     <footer>
