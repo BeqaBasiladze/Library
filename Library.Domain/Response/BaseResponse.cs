@@ -9,7 +9,7 @@ namespace Library.Domain.Response
 {
     public class BaseResponse<T> : IBaseResponse<T>
     {
-        public string Description { get; set; } // Error information 
+        public string? Description { get; set; } // Error information 
         public StatusCode StatusCode { get; set; } // Error status codes
         public T Data { get; set; } // Our task result
     }

@@ -14,10 +14,9 @@ namespace Library.Controllers
         {
             _repository = repository;
         }
-
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var menuItem = _repository.GetAllMenuItems();
+            var menuItem = await _repository.GetAllMenuItems();
             return View(menuItem);
         }
         public IActionResult Details(int id)
@@ -60,7 +59,7 @@ namespace Library.Controllers
             if(ModelState.IsValid)
             {
                 _repository.UpdateMenuItem(menuItem);
-                return RedirectToAction("index");
+                return RedirectToAction("Index");
             }
             menuItem.ModifiedAt = DateTime.Now;
             return View(menuItem);

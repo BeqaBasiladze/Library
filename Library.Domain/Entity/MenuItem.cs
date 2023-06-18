@@ -17,5 +17,6 @@ namespace Library.Domain.Entity
         public DateTime? ModifiedAt { get; set;}
         public DateTime? DeletedAt { get; set; }
         public bool? isDelete { get; set; }
+        public ICollection<DropdownMenuItem>? DropdownMenuItem { get; set; }
     }
 }

@@ -30,9 +30,9 @@ namespace Library.DAL.Repositories
             _context.SaveChanges();
         }
 
-        public IEnumerable<MenuItem> GetAllMenuItems()
+        public async Task<IEnumerable<MenuItem>> GetAllMenuItems()
         {
-            return _context.MenuItems.ToList();
+            return await _context.MenuItems.ToListAsync();
         }
 
         public MenuItem GetMenuItemById(int id)

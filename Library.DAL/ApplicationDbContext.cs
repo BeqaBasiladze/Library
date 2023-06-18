@@ -1,6 +1,6 @@
 ﻿using Library.Domain.Entity;
 using Library.Domain.Enum;
-using Library.Domain.ViewModel.User;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,13 +11,29 @@ using System.Threading.Tasks;
 
 namespace Library.DAL
 {
-    public class ApplicationDbContext : IdentityDbContext<User>
+    public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) 
         {
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<MenuItem>()
+                .HasMany(m => m.DropdownMenuItem)
+                .WithOne(d => d.MenuItem)
+                .HasForeignKey(d => d.MenuItemId);
 
-        public DbSet<User> Users { get; set; }
+            modelBuilder.Entity<DropdownMenuItem>()
+                .HasMany(d => d.SubMenuItems)
+                .WithOne(s => s.DropdownMenuItem)
+                .HasForeignKey(s => s.DropdownMenuItemId);
+        }
+
         public DbSet<MenuItem> MenuItems { get; set; }
+        public DbSet<Publisher> Publisher { get; set; }
+        public DbSet<DropdownMenuItem> DropdownMenuItems { get; set; }
+        public DbSet<SubMenuItem> SubMenuItems { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Country> Countries { get; set; }
     }
 }

@@ -1,0 +1,15 @@
+﻿using Library.Domain.Entity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Library.DAL.Interfaces
+{
+    public interface ICountryRepository : IBaseRepository<Country>
+    {
+        Task<Country> GetCountryById(int id);
+        Task<IEnumerable<Country>> GetAllCountries();
+    }
+}

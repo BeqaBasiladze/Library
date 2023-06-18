@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Library.DAL.Interfaces
 {
-    public interface IPublisherRepository
+    public interface IPublisherRepository : IBaseRepository<Publisher>
     {
-        Publisher GetPublisherById(int id);
-        IEnumerable<Publisher> GetAllPublishers();
-        void AddPublisher(Publisher publisher);
-        void UpdatePublisher(Publisher publisher);
-        void DeletePublisher(Publisher publisher);
+        Task<Publisher> GetPublisherById(int id);
+        Task<IEnumerable<Publisher>> GetAllPublishers();
+        //void AddPublisher(Publisher publisher);
+        //void UpdatePublisher(Publisher publisher);
+        //void DeletePublisher(Publisher publisher);
     }
 }

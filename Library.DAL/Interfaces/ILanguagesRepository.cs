@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Library.Service.Interfaces
+namespace Library.DAL.Interfaces
 {
-    public interface IMenuItemRepository
+    public interface ILanguagesRepository
     {
-        MenuItem GetMenuItemById(int id);
-        Task<IEnumerable<MenuItem>> GetAllMenuItems();
+        Task<Language> GetLangeageById(int id);
+        Task<IEnumerable<MenuItem>> GetAllLanguages();
         void AddMenuItem(MenuItem menuItem);
         void UpdateMenuItem(MenuItem menuItem);
         void DeleteMenuItem(MenuItem menuItem);

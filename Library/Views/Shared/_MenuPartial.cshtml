@@ -1,10 +1,16 @@
-﻿@model IEnumerable<Library.Domain.Entity.MenuItem>
+﻿@using Library.Domain.Entity
+@model List<MenuItem>
 
-@*<ul class="navbar-nav">
-    @foreach (var item in Model)
-    {
-        <li class="nav-item">
-            <a class="nav-link" href="@item.Url">@item.Title</a>
-        </li>
-    }
-</ul>*@
+@if (Model != null)
+{
+    <ul>
+        @foreach (var menuItem in Model)
+        {
+            <li><a href="@menuItem.Url">@menuItem.Title</a></li>
+        }
+    </ul>
+}
+else
+{
+    <p>No menu items available.</p>
+}

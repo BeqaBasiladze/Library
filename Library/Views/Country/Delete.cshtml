@@ -1,0 +1,24 @@
+﻿@using Library.Domain.Entity
+@model Country
+
+
+<h2>Delete Country</h2>
+
+<table>
+    <tr>
+        <td>Name:</td>
+        <td>@Model.Name</td>
+    </tr>
+    <tr>
+        <td>Country Code:</td>
+        <td>@Model.Code</td>
+    </tr>
+</table>
+
+<p>Are you sure you want to delete this Country?</p>
+
+<form asp-controller="Country" asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Delete</button> |
+    <a asp-controller="Country" asp-action="Index">Cancel</a>
+</form>

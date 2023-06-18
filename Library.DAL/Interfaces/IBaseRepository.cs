@@ -9,10 +9,9 @@ namespace Library.DAL.Interfaces
 {
     public interface IBaseRepository<T> where T : class
     {
-        bool Create(T entity);
-        bool Delete(T entity);
-        void Delete(Expression<Func<T, bool>> expression);
-        bool Update(T entity);
-        bool Save();
+        Task<bool> Create(T entity);
+        Task<bool> Delete(T entity);
+        Task<bool> Update(T entity);
+        Task<bool> Save();
     }
 }

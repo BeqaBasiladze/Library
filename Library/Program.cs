@@ -2,7 +2,6 @@ using Library.DAL;
 using Library.DAL.Interfaces;
 using Library.DAL.Repositories;
 using Library.Domain.Entity;
-using Library.Service.Implementations;
 using Library.Service.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -19,15 +18,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(optionsAction =>
     optionsAction.UseSqlServer(connection));
 
 
-builder.Services.AddIdentity<User, IdentityRole>().
-    AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddMemoryCache();
 builder.Services.AddSession();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IMenuItemRepository, MenuItemRepository>();
 builder.Services.AddScoped<IPublisherRepository, PublisherRepository>();
+builder.Services.AddScoped<IAddressRepository, AddressRepository>();
+builder.Services.AddScoped<ICountryRepository, CountryRepository>();
 
 var app = builder.Build();
 
