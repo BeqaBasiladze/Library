@@ -1,6 +1,7 @@
 ﻿using Library.DAL.Interfaces;
 using Library.Domain.Entity;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics.Metrics;
 
 namespace Library.Controllers
 {
@@ -41,6 +42,7 @@ namespace Library.Controllers
                 address.ModifiedAt = DateTime.Now;
                 address.isDelete = false;
                 address.Id = 1;
+                address.CountryId = 1;
                 await _addressRepository.Create(address);
                 return RedirectToAction("Index");
             }
@@ -61,6 +63,12 @@ namespace Library.Controllers
         {
             if (ModelState.IsValid)
             {
+                address.Id = address.Id;
+                address.CreatedAt = DateTime.Now;
+                address.ModifiedAt = DateTime.Now;
+                address.ModifiedBy = "";
+                address.CreatedBy = "";
+                address.CountryId = 1;
                 await _addressRepository.Update(address);
                 return RedirectToAction("Index");
             }

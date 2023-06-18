@@ -42,6 +42,7 @@ namespace Library.Controllers
                 publisher.ModifiedBy = "";
                 publisher.ModifiedAt = DateTime.Now;
                 publisher.isDelete = false;
+                publisher.AddressId = 1;
                 await _publisherRepository.Create(publisher);
                 return RedirectToAction("Index");
             }
@@ -62,6 +63,12 @@ namespace Library.Controllers
         {
             if(ModelState.IsValid)
             {
+                publisher.CreatedBy = "";
+                publisher.CreatedAt = DateTime.Now;
+                publisher.ModifiedBy = "";
+                publisher.ModifiedAt = DateTime.Now;
+                publisher.isDelete = false;
+                publisher.AddressId = 1;
                 await _publisherRepository.Update(publisher);
                 return RedirectToAction("Index");
             }
