@@ -1,0 +1,33 @@
+﻿@using Library.Domain.Entity
+@model List<Position>
+
+
+<h2>Position</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Description</td>
+                <td>
+                    <a asp-controller="Position" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                </td>
+                <td>
+                    <a asp-controller="Position" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>
+    <a asp-controller="Position" asp-action="Create">Create New</a>
+</p>

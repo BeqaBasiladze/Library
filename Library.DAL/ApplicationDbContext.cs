@@ -35,5 +35,11 @@ namespace Library.DAL
         public DbSet<SubMenuItem> SubMenuItems { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Country> Countries { get; set; }
+        public DbSet<Language> Languages { get; set; }
+        public DbSet<Position> StaffPositions { get; set; }
+        public DbSet<Author> Authors { get; set; }
+        public DbSet<Book> Books { get; set; }
+        public DbSet<Genre> Genres { get; set; }
+        public DbSet<BookGenre> BookGenres { get; set; }
     }
 }

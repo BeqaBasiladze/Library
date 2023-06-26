@@ -1,0 +1,46 @@
+﻿@using Library.Domain.Entity
+@model Author
+
+<h2>Create Author</h2>
+
+<form asp-controller="Author" asp-action="Create" method="post">
+    <div class="form-group">
+        <label>First name:</label>
+        <input asp-for="FirstName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Last name:</label>
+        <input asp-for="LastName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="date">Date</label>
+        <input asp-for="BirtDate" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label>Country:</label>
+        <input asp-for="CountryId" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+<p>
+    <a asp-controller="Author" asp-action="Index">Back to List</a>
+</p>
+
+
+<script>
+    $(document).ready(function () {
+        var date_input = $('input[name="date"]');
+        var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+        date_input.datepicker({
+            format: 'mm/dd/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+        })
+    })
+</script>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />

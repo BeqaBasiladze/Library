@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Library.DAL.Interfaces
 {
-    public interface ILanguagesRepository : IBaseRepository<Language>
+    public interface IPositionRepository : IBaseRepository<Position>
     {
-        Task<Language> GetLangeageById(int id);
-        Task<IEnumerable<Language>> GetAllLanguages();
+        Task<Position> GetPositionById(int id);
+        Task<IEnumerable<Position>> GetAllPositions();
     }
 }

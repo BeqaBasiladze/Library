@@ -9,42 +9,42 @@ using System.Threading.Tasks;
 
 namespace Library.DAL.Repositories
 {
-    public class AddressRepository : IAddressRepository
+    public class BookRepository : IBookRepository
     {
         private readonly ApplicationDbContext _context;
-        public AddressRepository(ApplicationDbContext context)
+        public BookRepository(ApplicationDbContext context)
         {
             _context = context;
         }
-        public async Task<bool> Create(Address entity)
+        public async Task<bool> Create(Book entity)
         {
-            await _context.Addresses.AddAsync(entity);
+            _context.Books.Add(entity);
             return await Save();
         }
 
-        public async Task<bool> Delete(Address entity)
+        public async Task<bool> Delete(Book entity)
         {
-            _context.Addresses.Remove(entity);
+            _context.Books.Remove(entity);
             return await Save();
         }
 
-        public async Task<Address> GetAddressById(int id)
+        public async Task<IEnumerable<Book>> GetAllBooksAsync()
         {
-            return await _context.Addresses.FindAsync(id);
+            return await _context.Books.ToListAsync();
         }
 
-        public async Task<IEnumerable<Address>> GetAllAddresses()
+        public async Task<Book> GetByBookIdAsync(int id)
         {
-            return await _context.Addresses.ToListAsync();
+            return await _context.Books.FindAsync(id);
         }
 
         public async Task<bool> Save()
         {
             var saved = await _context.SaveChangesAsync();
-            return saved > 0 ? true : false; ;
+            return saved > 0 ? true : false;
         }
 
-        public async Task<bool> Update(Address entity)
+        public async Task<bool> Update(Book entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
             return await Save();

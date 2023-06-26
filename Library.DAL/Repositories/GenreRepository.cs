@@ -9,42 +9,42 @@ using System.Threading.Tasks;
 
 namespace Library.DAL.Repositories
 {
-    public class AddressRepository : IAddressRepository
+    public class GenreRepository : IGenreRepository
     {
         private readonly ApplicationDbContext _context;
-        public AddressRepository(ApplicationDbContext context)
+        public GenreRepository(ApplicationDbContext context)
         {
             _context = context;
         }
-        public async Task<bool> Create(Address entity)
+        public async Task<bool> Create(Genre entity)
         {
-            await _context.Addresses.AddAsync(entity);
+            await _context.Genres.AddAsync(entity);
             return await Save();
         }
 
-        public async Task<bool> Delete(Address entity)
+        public async Task<bool> Delete(Genre entity)
         {
-            _context.Addresses.Remove(entity);
+            _context.Genres.Remove(entity);
             return await Save();
         }
 
-        public async Task<Address> GetAddressById(int id)
+        public async Task<IEnumerable<Genre>> GetAllGenresAsync()
         {
-            return await _context.Addresses.FindAsync(id);
+            return await _context.Genres.ToListAsync();
         }
 
-        public async Task<IEnumerable<Address>> GetAllAddresses()
+        public async Task<Genre> GetByGenreIdAsync(int id)
         {
-            return await _context.Addresses.ToListAsync();
+            return await _context.Genres.FindAsync(id);
         }
 
         public async Task<bool> Save()
         {
             var saved = await _context.SaveChangesAsync();
-            return saved > 0 ? true : false; ;
+            return saved > 0 ? true : false;
         }
 
-        public async Task<bool> Update(Address entity)
+        public async Task<bool> Update(Genre entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
             return await Save();

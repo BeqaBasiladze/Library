@@ -3,10 +3,12 @@
 
 @if (Model != null)
 {
-    <ul>
+    <ul class="nav">
         @foreach (var menuItem in Model)
         {
-            <li><a href="@menuItem.Url">@menuItem.Title</a></li>
+            <li class="nav-item">
+                <a class="nav-link" href="@menuItem.Url">@menuItem.Title</a>
+            </li>
         }
     </ul>
 }

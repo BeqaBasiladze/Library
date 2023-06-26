@@ -1,0 +1,16 @@
+﻿@using Library.Domain.Entity
+@model Genre
+
+<h2>Create Genre</h2>
+
+<form asp-controller="Genre" asp-action="Create" method="post">
+    <div class="form-group">
+        <label>Name:</label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+<p>
+    <a asp-controller="Genre" asp-action="Index">Back to List</a>
+</p>

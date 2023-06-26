@@ -9,42 +9,42 @@ using System.Threading.Tasks;
 
 namespace Library.DAL.Repositories
 {
-    public class AddressRepository : IAddressRepository
+    public class LanguageRepository : ILanguagesRepository
     {
         private readonly ApplicationDbContext _context;
-        public AddressRepository(ApplicationDbContext context)
+        public LanguageRepository(ApplicationDbContext context)
         {
-            _context = context;
+                _context = context;
         }
-        public async Task<bool> Create(Address entity)
+        public async Task<bool> Create(Language entity)
         {
-            await _context.Addresses.AddAsync(entity);
+            await _context.Languages.AddAsync(entity);
             return await Save();
         }
 
-        public async Task<bool> Delete(Address entity)
+        public async Task<bool> Delete(Language entity)
         {
-            _context.Addresses.Remove(entity);
+            _context.Languages.Remove(entity);
             return await Save();
         }
 
-        public async Task<Address> GetAddressById(int id)
+        public async Task<IEnumerable<Language>> GetAllLanguages()
         {
-            return await _context.Addresses.FindAsync(id);
+            return await _context.Languages.ToListAsync();
         }
 
-        public async Task<IEnumerable<Address>> GetAllAddresses()
+        public async Task<Language> GetLangeageById(int id)
         {
-            return await _context.Addresses.ToListAsync();
+            return await _context.Languages.FindAsync(id);
         }
 
         public async Task<bool> Save()
         {
             var saved = await _context.SaveChangesAsync();
-            return saved > 0 ? true : false; ;
+            return saved > 0 ? true : false;
         }
 
-        public async Task<bool> Update(Address entity)
+        public async Task<bool> Update(Language entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
             return await Save();

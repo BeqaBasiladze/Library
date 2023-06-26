@@ -1,26 +1,22 @@
 ﻿@using Library.Domain.Entity
-@model MenuItem
+@model Position
 
-<h2>Edit Menu Item</h2>
+<h2>Edit Position</h2>
 
-<form asp-controller="MenuItem" asp-action="Edit" method="post">
+<form asp-controller="Position" asp-action="Edit" method="post">
     <input type="hidden" asp-for="Id" />
 
     <div class="form-group">
         <label>Name:</label>
-        <input asp-for="Title" class="form-control" />
+        <input asp-for="Name" class="form-control" />
     </div>
     <div class="form-group">
         <label>Description:</label>
         <input asp-for="Description" class="form-control" />
     </div>
-    <div class="form-group">
-        <label>Url:</label>
-        <input asp-for="Url" class="form-control" />
-    </div>
     <button type="submit" class="btn btn-primary">Save</button>
 </form>
 
 <p>
-    <a asp-controller="MenuItem" asp-action="Index">Back to List</a>
+    <a asp-controller="Position" asp-action="Index">Back to List</a>
 </p>

@@ -9,33 +9,33 @@ using System.Threading.Tasks;
 
 namespace Library.DAL.Repositories
 {
-    public class AddressRepository : IAddressRepository
+    public class AuthorRepository : IAuthorRepository
     {
         private readonly ApplicationDbContext _context;
-        public AddressRepository(ApplicationDbContext context)
+        public AuthorRepository(ApplicationDbContext context)
         {
             _context = context;
         }
-        public async Task<bool> Create(Address entity)
+        public async Task<bool> Create(Author entity)
         {
-            await _context.Addresses.AddAsync(entity);
+            await _context.Authors.AddAsync(entity);
             return await Save();
         }
 
-        public async Task<bool> Delete(Address entity)
+        public async Task<bool> Delete(Author entity)
         {
-            _context.Addresses.Remove(entity);
+            _context.Authors.Remove(entity);
             return await Save();
         }
 
-        public async Task<Address> GetAddressById(int id)
+        public async Task<IEnumerable<Author>> GetAllAuthors()
         {
-            return await _context.Addresses.FindAsync(id);
+            return await _context.Authors.ToListAsync();
         }
 
-        public async Task<IEnumerable<Address>> GetAllAddresses()
+        public async Task<Author> GetAuthorById(int id)
         {
-            return await _context.Addresses.ToListAsync();
+            return await _context.Authors.FindAsync(id);
         }
 
         public async Task<bool> Save()
@@ -44,7 +44,7 @@ namespace Library.DAL.Repositories
             return saved > 0 ? true : false; ;
         }
 
-        public async Task<bool> Update(Address entity)
+        public async Task<bool> Update(Author entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
             return await Save();

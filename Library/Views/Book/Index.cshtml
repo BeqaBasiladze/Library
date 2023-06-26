@@ -1,0 +1,38 @@
+﻿@using Library.Domain.Entity
+@model List<Book>
+
+
+<h2>Author</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Publication date</th>
+            <th>ISBN</th>
+            <th>Quantity</th>
+            <th>Genre</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.PublicationDate</td>
+                <td>@item.ISBN</td>
+                <td>@item.Quantity</td>
+                <td>
+                    <a asp-controller="Book" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                </td>
+                <td>
+                    <a asp-controller="Book" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>
+    <a asp-controller="Book" asp-action="Create">Create New</a>
+</p>

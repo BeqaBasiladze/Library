@@ -21,6 +21,10 @@ namespace Library.Controllers
             _menuItemRepository = menuItemRepository;
             _context = context;
         }
+        public async Task<IActionResult> GetMenu()
+        {
+            return PartialView("_MenuPartial");
+        }
         public async Task<IActionResult> Index()
         {
             var menuItems = await _menuItemRepository.GetAllMenuItems();

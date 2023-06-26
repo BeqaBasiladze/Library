@@ -9,42 +9,42 @@ using System.Threading.Tasks;
 
 namespace Library.DAL.Repositories
 {
-    public class AddressRepository : IAddressRepository
+    public class PositionRepository : IPositionRepository
     {
         private readonly ApplicationDbContext _context;
-        public AddressRepository(ApplicationDbContext context)
+        public PositionRepository(ApplicationDbContext context)
         {
             _context = context;
         }
-        public async Task<bool> Create(Address entity)
+        public async Task<bool> Create(Position entity)
         {
-            await _context.Addresses.AddAsync(entity);
+            await _context.StaffPositions.AddAsync(entity);
             return await Save();
         }
 
-        public async Task<bool> Delete(Address entity)
+        public async Task<bool> Delete(Position entity)
         {
-            _context.Addresses.Remove(entity);
+            _context.StaffPositions.Remove(entity);
             return await Save();
         }
 
-        public async Task<Address> GetAddressById(int id)
+        public async Task<Position> GetPositionById(int id)
         {
-            return await _context.Addresses.FindAsync(id);
+            return await _context.StaffPositions.FindAsync(id);
         }
 
-        public async Task<IEnumerable<Address>> GetAllAddresses()
+        public async Task<IEnumerable<Position>> GetAllPositions()
         {
-            return await _context.Addresses.ToListAsync();
+            return await _context.StaffPositions.ToListAsync();
         }
 
         public async Task<bool> Save()
         {
             var saved = await _context.SaveChangesAsync();
-            return saved > 0 ? true : false; ;
+            return saved > 0 ? true : false;
         }
 
-        public async Task<bool> Update(Address entity)
+        public async Task<bool> Update(Position entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
             return await Save();
